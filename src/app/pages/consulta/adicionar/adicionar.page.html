@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Adicionar Consulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form [formGroup]="form">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Médico <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select placeholder="Selecione..." formControlName="key_medico">
+          <ion-select-option *ngFor="let medico of medicos | async" value="{{medico.key}}">{{medico.nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.key_medico">
+        <ng-container *ngIf="key_medico.hasError(error.type) && (key_medico.dirty || key_medico.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Paciente <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select placeholder="Selecione..." formControlName="key_paciente">
+          <ion-select-option *ngFor="let paciente of pacientes | async" value="{{paciente.key}}">{{paciente.nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.key_paciente">
+        <ng-container *ngIf="key_paciente.hasError(error.type) && (key_paciente.dirty || key_paciente.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item-divider></ion-item-divider>
+      <ion-item>
+        <ion-label>Data <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime display-format="DD MM YYYY" placeholder="Selecione a data" formControlName="data"></ion-datetime>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.data">
+        <ng-container *ngIf="data.hasError(error.type) && (data.dirty || data.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label>Hora de Início <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime display-format="HH:mm" placeholder="Informe a hora" formControlName="hora_inicio"></ion-datetime>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.hora_inicio">
+        <ng-container *ngIf="hora_inicio.hasError(error.type) && (hora_inicio.dirty || hora_inicio.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label>Hora de Fim <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime display-format="HH:mm"  placeholder="Informe a hora" formControlName="hora_fim"></ion-datetime>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.hora_fim">
+        <ng-container *ngIf="hora_fim.hasError(error.type) && (hora_fim.dirty || hora_fim.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item-divider></ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked">Observações</ion-label>
+        <ion-textarea maxlength="200" formControlName="observacoes"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="!form.valid" (click)="onSubmit()" class="ion-no-margin">Criar</ion-button>
+    </div>
+  </form>
+</ion-content>

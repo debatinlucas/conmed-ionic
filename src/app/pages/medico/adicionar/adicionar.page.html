@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Adicionar Médico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form [formGroup]="form">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nome <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="nome" data-cy="nome" maxlength="60"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.nome">
+        <ng-container *ngIf="nome.hasError(error.type) && (nome.dirty || nome.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">CRM <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="crm" maxlength="5" data-cy="crm"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.crm">
+        <ng-container *ngIf="crm.hasError(error.type) && (crm.dirty || crm.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Logradouro <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="logradouro" data-cy="logradouro" maxlength="100"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.logradouro">
+        <ng-container *ngIf="logradouro.hasError(error.type) && (logradouro.dirty || logradouro.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Número <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="numero" data-cy="numero" maxlength="10"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.numero">
+        <ng-container *ngIf="numero.hasError(error.type) && (numero.dirty || numero.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Cidade <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="cidade" data-cy="cidade" maxlength="40"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.cidade">
+        <ng-container *ngIf="cidade.hasError(error.type) && (cidade.dirty || cidade.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Estado <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select placeholder="Selecione o Estado..." formControlName="uf" data-cy="uf">
+          <ion-select-option value="SC">Santa Catarina</ion-select-option>
+          <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
+          <ion-select-option value="PR">Paraná</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.uf">
+        <ng-container *ngIf="uf.hasError(error.type) && (uf.dirty || uf.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Celular <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="celular" data-cy="celular" maxlength="15" placeholder="(99) 99999-9999"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.celular">
+        <ng-container *ngIf="celular.hasError(error.type) && (celular.dirty || celular.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Fixo <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="fixo" data-cy="fixo" maxlength="14" placeholder="(99) 9999-9999"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMensagens.fixo">
+        <ng-container *ngIf="fixo.hasError(error.type) && (fixo.dirty || fixo.touched)">
+          <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" data-cy="btnadd" [disabled]="!form.valid" (click)="onSubmit()" class="ion-no-margin">Criar</ion-button>
+    </div>
+  </form>
+</ion-content>
